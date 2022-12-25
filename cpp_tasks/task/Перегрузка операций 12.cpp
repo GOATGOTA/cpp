@@ -19,7 +19,6 @@ const double EURO = 75;
 class Account {
 public:
     Account(const Account& other) {
-        cout << "Вызов конструктора копирования объекта " << this << endl;
         this->surname = other.surname;
         this->accNum = other.accNum;
         this->percent = other.percent;
@@ -31,10 +30,9 @@ public:
         }
     }
 
-    Account() { cout << "Вызов конструктора объекта " << this << endl; }
+    Account() {}
 
     Account(string sur, int acc, float per, float sum, int size) {
-        cout << "Вызов конструктора c 4 объектами " << this << endl;
         this->surname = sur;
         this->accNum = acc;
         this->percent = per;
@@ -47,7 +45,6 @@ public:
     }
 
     Account& operator = (const Account& other) {
-        cout << "Вызов оператора = " << this << endl;
         this->surname = other.surname;
         this->accNum = other.accNum;
         this->percent = other.percent;
@@ -67,14 +64,12 @@ public:
     }
 
     Account& operator + (const double& other) {
-        cout << "Вызов оператора + " << this << endl;
         this->summa += other;
 
         return *this;
     }
 
     Account& operator - (const double& other) {
-        cout << "Вызов оператора - " << this << endl;
         this->summa -= other;
 
         return *this;
@@ -85,7 +80,7 @@ public:
 
 
 
-    ~Account() { cout << "Вызов деструктора объекта " << this << endl; delete[] data; }
+    ~Account() { delete[] data; }
 
 
 private:
@@ -97,24 +92,6 @@ private:
     int size;
 
 public:
-    void setAccount(string surname, int accNum, float percent, float summa, int size) {
-        this->surname = surname;
-        this->accNum = accNum;
-        this->percent = percent;
-        this->summa = summa;
-        this->size = size;
-        this->data = new int[size];
-        for (int i = 0; i < size; i++) {
-            data[i] = i;
-        }
-    }
-
-
-    void Print()
-    {
-        cout << "Surname: " << surname << "\nAccNum: " << accNum << "\nPercent: " << percent << "\nSumma: " << summa << endl << endl;
-    }
-
     void ChangeName(string surname)
     {
         this->surname = surname;
