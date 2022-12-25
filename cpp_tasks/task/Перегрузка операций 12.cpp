@@ -286,7 +286,6 @@ int main()
     Account bill("Gotin", 5555, 2.5, 5000.24, 5);
     double deposit = 1000;
     bill + deposit;
-    bill.Print();
 
 
 
