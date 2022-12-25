@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <conio.h>
 #include <math.h>
 #include <cmath>
@@ -46,14 +46,14 @@ public:
         }
     }
 
-    Account & operator = (const Account& other) {
+    Account& operator = (const Account& other) {
         cout << "Вызов оператора = " << this << endl;
         this->surname = other.surname;
         this->accNum = other.accNum;
         this->percent = other.percent;
         this->summa = other.summa;
         this->size = other.size;
-        
+
         if (this->data != nullptr) {
             delete[] this->data;
         }
@@ -62,9 +62,28 @@ public:
         for (int i = 0; i < size; i++) {
             data[i] = i;
         }
-        
+
         return *this;
     }
+
+    Account& operator + (const double& other) {
+        cout << "Вызов оператора + " << this << endl;
+        this->summa += other;
+
+        return *this;
+    }
+
+    Account& operator - (const double& other) {
+        cout << "Вызов оператора - " << this << endl;
+        this->summa -= other;
+
+        return *this;
+    }
+
+
+
+
+
 
     ~Account() { cout << "Вызов деструктора объекта " << this << endl; delete[] data; }
 
@@ -288,11 +307,11 @@ int main()
 {
     setlocale(LC_ALL, "ru");
     Account bill("Gotin", 5555, 2.5, 5000.24, 5);
-    Account bill_2("Myrov", 3333, 1.5, 8000.24, 3);
-    bill_2 = bill;
-    bill_2.Print();
+    double deposit = 1000;
+    bill + deposit;
     bill.Print();
 
-    
+
+
 
 }
