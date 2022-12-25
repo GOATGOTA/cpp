@@ -96,7 +96,6 @@ public:
     {
         this->surname = surname;
         cout << "Имя изменено на " << surname << endl << endl;
-        Print();
     }
 
     void Withdraw(float money)
@@ -108,7 +107,6 @@ public:
         {
             this->summa -= money;
             cout << "Сумма в размере " << money << " снята с вашего счёта. Баланс: " << this->summa << endl << endl;
-            Print();
         }
     }
 
@@ -122,7 +120,6 @@ public:
     {
         this->percent += percent;
         cout << percent << " процент(ов) к Вашему счёту " << endl << endl;
-        Print();
 
     }
 
