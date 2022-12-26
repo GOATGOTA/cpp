@@ -1,32 +1,32 @@
-﻿#include <algorithm>
 #include <iostream>
-#include <iterator>
 #include <string>
 #include <vector>
-#include <cstdlib>
-#include <sstream>
 
+// 12.	POSCHITAT' KOL-VO MAX ELEMENTOV V POSLEDOVATEL'NOSTI CHISEL
 
 using namespace std;
 
-
 int main()
-{
-
-	string s = "1 0 0 0 0 1 1";
-	stringstream ss(s);
+{	
+	int n;
+	cout << "Enter kolichestvo chisel : ";
+	cin >> n;
 	vector<int> v;
-
-	copy(istream_iterator<int>(ss), {}, back_inserter(v));
+	v.reserve(n);
+	for (int i = 0; i < n; i++) {
+		int number;
+		cout << "Enter number: ";
+		cin >> number;
+		v.push_back(number);
+	}
 	int counter = 0;
 	int min = INT_MIN;
-	for (int i = 0; i < v.size(); i++) {
-		if (v[i] > min) { min = v[i]; }
+	for (auto i : v) {
+		if (i > min) { min = i; }
 	}
-	for (int i = 0; i < v.size(); i++) {
-		if (v[i] == min) { counter++; }
+	for (auto i : v) {
+		if ( i == min) { counter++; }
 	}
-	cout << counter;
+	cout << "Kol-vo max elementov = " << counter;
 	return 0;
-
 }
