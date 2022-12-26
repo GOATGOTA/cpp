@@ -23,25 +23,15 @@ public:
         this->accNum = other.accNum;
         this->percent = other.percent;
         this->summa = other.summa;
-        this->size = size;
-        this->data = new int[size];
-        for (int i = 0; i < size; i++) {
-            data[i] = i;
-        }
     }
 
     Account() {}
 
-    Account(string sur, int acc, float per, float sum, int size) {
+    Account(string sur, int acc, float per, float sum) {
         this->surname = sur;
         this->accNum = acc;
         this->percent = per;
         this->summa = sum;
-        this->size = size;
-        this->data = new int[size];
-        for (int i = 0; i < size; i++) {
-            data[i] = i;
-        }
     }
 
     Account& operator = (const Account& other) {
@@ -49,47 +39,32 @@ public:
         this->accNum = other.accNum;
         this->percent = other.percent;
         this->summa = other.summa;
-        this->size = other.size;
-
-        if (this->data != nullptr) {
-            delete[] this->data;
-        }
-
-        this->data = new int[other.size];
-        for (int i = 0; i < size; i++) {
-            data[i] = i;
-        }
 
         return *this;
     }
 
-    Account& operator + (const double& other) {
-        this->summa += other;
-
-        return *this;
+    Account operator + (const Account& other) {
+        Account c;
+        c.surname = this->surname;
+        c.accNum = this->accNum;
+        c.percent = this->percent + other.percent;
+        c.summa = this->summa + other.summa;
+        return c;
     }
 
-    Account& operator - (const double& other) {
-        this->summa -= other;
-
-        return *this;
+    Account operator - (const Account& other) {
+        Account c;
+        c.surname = this->surname;
+        c.accNum = this->accNum;
+        c.percent = this->percent - other.percent;
+        c.summa = this->summa - other.summa;
+        return c;
     }
 
-
-
-
-
-
-    ~Account() { delete[] data; }
-
-
-private:
     string surname;
     int accNum;
     float percent;
     float summa;
-    int* data;
-    int size;
 
 public:
     void ChangeName(string surname)
@@ -277,14 +252,22 @@ public:
         cout << endl << endl;
     }
 };
+
+ostream& operator << (ostream& os, const Account& other) {
+    os << "Имя владельца: " << other.surname << endl;
+    os << "Номер владельца: " << other.accNum << endl;
+    os << "Процентная ставка владельца: " << other.percent << endl;
+    os << "Баланс владельца: " << other.summa << endl;
+    return os;
+}
+
 int main()
 {
     setlocale(LC_ALL, "ru");
-    Account bill("Gotin", 5555, 2.5, 5000.24, 5);
-    double deposit = 1000;
-    bill + deposit;
+    Account bill("Gotin", 5555, 2.5, 5000);
+    Account bill2("Gotin", 5555, 2.5, 5000);
 
-
-
+    Account bill3 = bill + bill2;
+    cout << bill + bill2;
 
 }
