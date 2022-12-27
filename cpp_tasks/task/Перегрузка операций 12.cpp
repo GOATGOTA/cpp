@@ -61,6 +61,25 @@ public:
         return c;
     }
 
+    Account operator + (const double& other) {
+        Account c;
+        c.surname = this->surname;
+        c.accNum = this->accNum;
+        c.percent = this->percent;
+        c.summa = this->summa + other;
+
+        return c;
+    }
+    Account operator - (const double& other) {
+        Account c;
+        c.surname = this->surname;
+        c.accNum = this->accNum;
+        c.percent = this->percent;
+        c.summa = this->summa - other;
+
+        return c;
+    }
+
     string surname;
     int accNum;
     float percent;
@@ -267,7 +286,7 @@ int main()
     Account bill("Gotin", 5555, 2.5, 5000);
     Account bill2("Gotin", 5555, 2.5, 5000);
 
-    Account bill3 = bill + bill2;
-    cout << bill + bill2;
+    
+    cout << bill + 1000;
 
 }
