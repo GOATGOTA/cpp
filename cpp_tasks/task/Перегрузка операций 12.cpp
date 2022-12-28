@@ -18,6 +18,11 @@ const double DOLLAR = 60;
 const double EURO = 75;
 class Account {
 public:
+    string surname = "None";
+    int accNum = 0;
+    float percent = 0;
+    float summa = 0;
+
     Account(const Account& other) {
         this->surname = other.surname;
         this->accNum = other.accNum;
@@ -43,49 +48,29 @@ public:
         return *this;
     }
 
-    Account operator + (const Account& other) {
-        Account c;
-        c.surname = this->surname;
-        c.accNum = this->accNum;
-        c.percent = this->percent + other.percent;
-        c.summa = this->summa + other.summa;
-        return c;
-    }
-
-    Account operator - (const Account& other) {
-        Account c;
-        c.surname = this->surname;
-        c.accNum = this->accNum;
-        c.percent = this->percent - other.percent;
-        c.summa = this->summa - other.summa;
-        return c;
-    }
-
     Account operator + (const double& other) {
-        Account c;
-        c.surname = this->surname;
-        c.accNum = this->accNum;
-        c.percent = this->percent;
-        c.summa = this->summa + other;
+        Account magic;
+        magic.surname = this->surname;
+        magic.accNum = this->accNum;
+        magic.percent = this->percent;
+        magic.summa = this->summa;
+        magic.Deposit(other);
 
-        return c;
+        return magic;
     }
+
     Account operator - (const double& other) {
-        Account c;
-        c.surname = this->surname;
-        c.accNum = this->accNum;
-        c.percent = this->percent;
-        c.summa = this->summa - other;
+        Account magic;
+        magic.surname = this->surname;
+        magic.accNum = this->accNum;
+        magic.percent = this->percent;
+        magic.summa = this->summa;
+        magic.Withdraw(other);
 
-        return c;
+        return magic;
     }
 
-    string surname;
-    int accNum;
-    float percent;
-    float summa;
 
-public:
     void ChangeName(string surname)
     {
         this->surname = surname;
@@ -284,9 +269,9 @@ int main()
 {
     setlocale(LC_ALL, "ru");
     Account bill("Gotin", 5555, 2.5, 5000);
-    Account bill2("Gotin", 5555, 2.5, 5000);
-
-    
-    cout << bill + 1000;
-
+    Account bill2 = bill - 5000;
+    bill = bill + 1000;
+    cout << bill2 << bill;
+    // Я перегрузил оператор << с классом Account, оператор + с числом, оператор - с числом, за что кол?
+    // Если я не правильно что-то сделал, пожалуйста, опишите мою ошибку. Заранее спасибо
 }
